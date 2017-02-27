@@ -17,9 +17,9 @@ class App extends Component {
  
   var place;
     switch(this.state.position){
-      case 'Duel': place = <Duel/>; break;
+      case 'Landing': place = <Landing/>; break;
       case 'Submit': place = <Submit/>; break;
-      default: place = <Landing/>
+      default: place = <Duel/>
     } 
 
     return (
