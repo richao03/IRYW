@@ -1,0 +1,43 @@
+.question {
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.mainMale {
+    text-align: left;
+    display: inline-block;
+    border: 1px solid grey;
+    border-radius: 15px;
+    background-color: #61bcf9;
+    margin: 10px 10px 10px 10px;
+    height: 40vh;
+    width: 40vw;
+}
+
+.Duel {
+    margin: 10px 10px 10px 10px;
+}
+
+.mainFemale {
+    text-align: left;
+    display: inline-block;
+    border: 1px solid grey;
+    border-radius: 15px;
+    background-color: #f98ef6;
+    margin: 10px 10px 10px 10px;
+    height: 40vh;
+    width: 40vw;
+}
+
+.maleVote {
+    display: inline-block;
+}
+
+.femaleVote {
+    display: inline-block;
+}
+
+.wrapper{
+  display:inline-block;
+}
