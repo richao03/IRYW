@@ -6,10 +6,24 @@ class Duel extends Component {
     constructor() {
         super();
         this.state = {
+          issues:[],
             voted: "no"
         }
     }
 
+  componentDidMount(){
+    fetch('/api/issues')
+    .then((res)=>{
+
+//magically turn from object to JSON 
+      console.log("line 16", res)
+      return res.json()
+    })
+    .then((data)=>{
+      //magically returns correct data
+     this.setState({issues:this.state.issues.concat(data)})
+    })
+  }
 
     vote(id, maleVote, femaleVote) {
         const vote_data = { maleVote: maleVote, femaleVote: femaleVote, id: id }
@@ -31,8 +45,8 @@ class Duel extends Component {
 
 
     render() {
-        let issuesList = this.props.issues;
-        console.log("this is line 30 in duel ", this.props)
+        let issuesList = this.state.issues;
+        console.log("this is line 30 in duel ", this.state)
         return (
             <div className="Duel">
       
