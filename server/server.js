@@ -58,15 +58,17 @@ app.put('/api/issues/voted/:id', function(req, res) {
         if (err) {
             return console.log(err);
         } else {
-        	console.log("this is from backend", req.body)
-            db.query("UPDATE issues SET male_vote = male_vote+$2, female_vote = female_vote+$3  WHERE id=$1", [...values], (err, table) => {
+        	console.log("this is from backend line 61")
+            db.query("UPDATE issues SET male_vote = male_vote+$2, female_vote = female_vote+$3  WHERE id=$1", [...values], function(err, table) {
                 if (err) {
                     return console.log(err)
                 } else {
-                    db.end();
-                    res.status(201).json({ msg: "data updated" })
+                    done();
+                    console.log(")(*)(*)(*)(*)(*)(*)(*","data updated")
+                    res.status(201).send({msg:"data updated"})
                 }
             })
+                
 
         }
     })
@@ -87,8 +89,8 @@ app.post('/api/issue', function(req, res) {
                 if (err) {
                     return console.log(err)
                 } else {
-                    db.end();
-                    res.status(201).send({ msg: "data good" })
+                    done()
+                    res.status(201).send({ msg: "data submitted" })
 
                 }
             })

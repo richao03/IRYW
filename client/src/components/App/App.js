@@ -1,37 +1,41 @@
 import React, { Component } from 'react';
-import {Router, Route} from 'react-router';
 import './App.css';
-import Duel from '../Duel/Duel.js';
-import Landing from '../Landing/Landing.js'
-import Submit from '../Submit/Submit.js'
+
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {GoToSubmit, GoToDuel, GoToLanding} from '../../action/topbar'
+import whichToShow from './whichToShow'
+//which global state should be used in this component to which local property
+const mapStateToProps = (state) => {
+    console.log("STATE IN APP ********", state)
+    return {
+        issues:state.basicReducer.issues,
+        location: state.locationReducer.location
+    }
+}
+
+
 
 class App extends Component {
 
-  constructor(){
-    super();
-    this.state={position:""}
-  }
+
 
 
   render() {
- 
-  var place;
-    switch(this.state.position){
-      case 'Landing': place = <Landing/>; break;
-      case 'Submit': place = <Submit/>; break;
-      default: place = <Duel/>
-    } 
-
     return (
       <div className="App">
-        <h1>hello</h1>
-        <button onClick={()=>this.setState({position:"Duel"})}>Duel</button>
-        <button onClick={()=>this.setState({position:"Landing"})}>Landing</button>
-        <button onClick={()=>this.setState({position:"Submit"})}>Submit</button>
-         {place}     
+        <h1>hello... its me</h1>
+        <button onClick={()=>this.props.GoToDuel()}>Duel</button>
+        <button onClick={()=>this.props.GoToLanding()}>Landing</button>
+        <button onClick={()=>this.props.GoToSubmit()}>Submit</button>
+         {whichToShow(this.props.issues, this.props.location)}     
       </div>
     );
   }
 }
 
-export default App;
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({GoToDuel, GoToSubmit, GoToLanding}, dispatch)
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

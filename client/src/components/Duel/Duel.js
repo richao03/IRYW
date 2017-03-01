@@ -1,85 +1,57 @@
 import React, { Component } from 'react';
 import './Duel.css';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {VoteAction} from '../../action/vote';
 
 class Duel extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          issues:[],
-            voted: "no"
-        }
-        this.vote = this.vote.bind(this);
-    }
-
-  componentDidMount(){
-    console.log("this is in mount", this)
-    fetch('/api/issues')
-    .then((res)=>{
-//magically turn from object to JSON 
-      console.log("line 16", res)
-      return res.json()
-    })
-    .then((data)=>{
-//magically returns correct data
-     this.setState({issues:this.state.issues.concat(data)})
-    })
-  }
-
-    vote(id, maleVote, femaleVote) {
-      console.log("this is in vote", this)
-        const vote_data = { maleVote: maleVote, femaleVote: femaleVote, id: id }
-        var request = new Request('/api/issues/voted/' + id, {
-            method: "PUT",
-            headers: new Headers({ 'Content-Type': 'application/json' }),
-            body: JSON.stringify(vote_data)
-        });
-        if(this.state.voted == "no"){
-        fetch(request)
-        // let setVoteToYes={voted:"yes"}
-        // let newState = {...this.state, ...setVoteToYes}
-        // console.log("new state is here", newState)
-        // this.state = newState;
-        // console.log("we in line 41!!", this.state)
-        this.setState({voted:"yes"})
-          } else {
-            return 
-          }
-        
-    }
-
-
 
     render() {
-        let issuesList = this.state.issues;
-        console.log("this is line 30 in duel ", this.state)
-        return (
-            <div className="Duel">
-      
-              {issuesList.map(issue=>
+        let issuesList = this.props.issues;
+        console.log("this is line 13 in duel ", this.props)
+
+        if(this.props.issues){
+          var theList = issuesList.map(issue=>
           <div className="question" key={issue.headline}>
           Question: {issue.headline} <br/> 
           <div className="maleVote">{issue.male_vote}</div>
           <div className="wrapper">
-          <div className="mainMale" onClick={()=>this.vote(issue.id, 1, 0)}>
+          <div className="mainMale" onClick={()=>this.props.VoteAction(issue.id, 1, 0)} >
           Main Points: {issue.male_main}<br/>
           Supporting Details: {issue.male_details}<br/>
           </div>
           </div>
+          {this.props.voted}
           <div className="wrapper">
-          <div className="mainFemale" onClick={()=>this.vote(issue.id, 0, 1)}>
+          <div className="mainFemale" onClick={()=>this.props.VoteAction(issue.id, 0, 1)}>
           main from female: {issue.female_main}<br/>
           detail from female: {issue.female_details}
           </div>
           </div>
            <div className="femaleVote">{issue.female_vote}</div>
           </div>
-          )}
+          )
         
+        }
+        return (
+            <div className="Duel">
+      {theList}
+              
     
       </div>
         );
     }
 }
 
-export default Duel;
+function mapDispatchToProps(dispatch){
+    return bindActionCreators({VoteAction}, dispatch)
+}
+
+function mapStateToProps(state) {
+    return {
+        issues:state.basicReducer.issues
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Duel)
