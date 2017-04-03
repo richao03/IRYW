@@ -1,4 +1,3 @@
-
 const initialState = { fetched: false, voted: "no" }
 
 const reducer = (state = initialState, action) => {
@@ -19,14 +18,18 @@ const reducer = (state = initialState, action) => {
 
         case "VOTE":
             return state
-    
+
 
         case "ADDISSUE":
-               console.log("JUST SUBMITTED")
+            console.log("JUST SUBMITTED")
             return state
-         
+
         case "FINISHADDISSUE":
             console.log("finished adding issue!!")
+            return state
+
+        case "ADDUSER":
+            console.log("JUST ADDED A USER")
             return state
 
         default:

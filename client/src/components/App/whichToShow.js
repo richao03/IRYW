@@ -2,7 +2,7 @@ import React from 'react';
 import Duel from '../Duel/Duel.js';
 import Landing from '../Landing/Landing.js'
 import Submit from '../Submit/Submit.js'
-
+import LogIn from '../LogIn/LogIn.js'
 
 export default function whichToShow(issues, location){
 	console.log("inside which to show", issues, location)
@@ -19,6 +19,12 @@ export default function whichToShow(issues, location){
     if(location ==="Submit"){
         return(
             <Submit issues={issues}/>
+        )
+    }
+
+        if(location ==="LogIn"){
+        return(
+            <LogIn issues={issues}/>
         )
     }
 }

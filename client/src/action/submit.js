@@ -1,5 +1,4 @@
 import {FINISHADDISSUE} from './constants';
-import axios from 'axios';
 import store  from '../store';
 
 export const AddIssue = (headline, male_details, female_details,male_main,female_main) => {

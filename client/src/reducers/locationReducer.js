@@ -15,6 +15,9 @@ const goingToLanding = (state = initialState) => {
     return {...state, "location": "Landing" }
 }
 
+const goingToLogIn = (state = initialState) => {
+    return {...state, "location": "LogIn" }
+}
 
 const locationReducer = (state = initialState, action) => {
 
@@ -34,6 +37,11 @@ const locationReducer = (state = initialState, action) => {
             newstate = goingToLanding(state)
   
             console.log("going to Landing")
+            return newstate
+
+      case "LOGIN":
+            newstate = goingToLogIn(state)
+            console.log("going to Log In")
             return newstate
 
         default:

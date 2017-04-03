@@ -3,7 +3,7 @@ import './App.css';
 
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {GoToSubmit, GoToDuel, GoToLanding} from '../../action/topbar'
+import {GoToSubmit, GoToDuel, GoToLanding, GoToLogIn} from '../../action/topbar'
 import whichToShow from './whichToShow'
 //which global state should be used in this component to which local property
 const mapStateToProps = (state) => {
@@ -28,6 +28,7 @@ class App extends Component {
         <button onClick={()=>this.props.GoToDuel()}>Duel</button>
         <button onClick={()=>this.props.GoToLanding()}>Landing</button>
         <button onClick={()=>this.props.GoToSubmit()}>Submit</button>
+        <button onClick={()=>this.props.GoToLogIn()}>Log In</button>
          {whichToShow(this.props.issues, this.props.location)}     
       </div>
     );
@@ -35,7 +36,7 @@ class App extends Component {
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({GoToDuel, GoToSubmit, GoToLanding}, dispatch)
+    return bindActionCreators({GoToDuel, GoToSubmit, GoToLanding, GoToLogIn}, dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);

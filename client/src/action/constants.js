@@ -6,3 +6,4 @@ export const SUBMIT = "SUBMIT";
 export const ADDISSUE = "ADDISSUE";
 export const LANDING = "LANDING";
 export const FINISHADDISSUE = "FINISHADDISSUE";
+export const LOGIN = "LOGIN"

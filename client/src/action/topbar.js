@@ -1,4 +1,4 @@
-import { LANDING, DUEL, SUBMIT } from './constants'
+import { LANDING, DUEL, SUBMIT, LOGIN } from './constants'
 // import {bindActionCreators} from 'redux'
 // import {connect} from 'react-redux'
 
@@ -19,6 +19,13 @@ export const GoToDuel = () => {
 export const GoToSubmit = () => {
     const action = {
         type: SUBMIT
+    }
+    return action
+}
+
+export const GoToLogIn = () => {
+    const action = {
+        type: LOGIN
     }
     return action
 }
